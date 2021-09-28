@@ -10,7 +10,7 @@
     const calcBtn = document.getElementById('calcBtn')
     const numberOut = document.getElementById('numberOut')
 
-    const {instance: tofu} = await WebAssembly.instantiateStreaming(fetch("http://127.0.0.1:3000/calc.wasm"));
+    const {instance: tofu} = await WebAssembly.instantiateStreaming(fetch("/calc.wasm"));
     calcBtn.addEventListener('click', () => {
         numberOut.innerText = tofu.exports.calc(number1.value,number2.value)
     })
