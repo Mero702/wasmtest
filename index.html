@@ -1,0 +1,17 @@
+<!doctype>
+<input type="number" name="number1" id="number1">
+<span>+</span>
+<input type="number" name="number2" id="number2">
+<input type="button" value="calc" id="calcBtn">
+<span id = "numberOut"></span>
+<script type="module">
+    const number1 = document.getElementById('number1')
+    const number2 = document.getElementById('number2')
+    const calcBtn = document.getElementById('calcBtn')
+    const numberOut = document.getElementById('numberOut')
+
+    const {instance: tofu} = await WebAssembly.instantiateStreaming(fetch("http://127.0.0.1:3000/calc.wasm"));
+    calcBtn.addEventListener('click', () => {
+        numberOut.innerText = tofu.exports.calc(number1.value,number2.value)
+    })
+</script>
