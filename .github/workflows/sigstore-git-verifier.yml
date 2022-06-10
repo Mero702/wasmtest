@@ -1,0 +1,18 @@
+name: sigstore-git-verifier
+on: [push, pull_request]
+
+jobs:
+  verify-commit:
+    runs-on: ubuntu-latest
+    name: Verify latest commit is in tlog
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - uses: sigstore/cosign-installer@main
+        with:
+          cosign-release: 'v0.1.0'
+      - name: Verify latest commit is in tlog
+        uses: sigstore/sigstore-git-verifier@main
